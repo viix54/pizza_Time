@@ -5,7 +5,7 @@ function SortPopUp({ categories }) {
   const [visiblePopUp, setVisiblePopUp] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
   const sortRef = useRef();
-  const activeLabel = categories[activeItem];
+  const activeLabel = categories[activeItem].name;
 
   const onSelectItem = (index) => {
     setActiveItem(index);
@@ -52,12 +52,12 @@ function SortPopUp({ categories }) {
         <div className="sort__popup">
           <ul>
             {categories &&
-              categories.map((item, index) => (
+              categories.map((obj, index) => (
                 <li
                   className={activeItem === index ? 'active' : ''}
                   onClick={() => onSelectItem(index)}
-                  key={`${item}_${index}`}>
-                  {item}
+                  key={`${obj.type}_${index}`}>
+                  {obj.name}
                 </li>
               ))}
           </ul>
