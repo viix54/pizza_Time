@@ -1,14 +1,17 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
+import PropTypes, { string } from 'prop-types';
 
-function SortPopUp({ categories }) {
+const SortPopUp = React.memo(function SortPopUp({ activeSortType, categories, onClickSortType }) {
   const [visiblePopUp, setVisiblePopUp] = useState(false);
-  const [activeItem, setActiveItem] = useState(0);
+
   const sortRef = useRef();
-  const activeLabel = categories[activeItem].name;
+  const activeLabel = categories.find((obj) => obj.type === activeSortType).name;
 
   const onSelectItem = (index) => {
-    setActiveItem(index);
+    if (onClickSortType) {
+      onClickSortType(index);
+    }
     setVisiblePopUp(false);
   };
 
@@ -54,8 +57,8 @@ function SortPopUp({ categories }) {
             {categories &&
               categories.map((obj, index) => (
                 <li
-                  className={activeItem === index ? 'active' : ''}
-                  onClick={() => onSelectItem(index)}
+                  className={activeSortType === obj.type ? 'active' : ''}
+                  onClick={() => onSelectItem(obj)}
                   key={`${obj.type}_${index}`}>
                   {obj.name}
                 </li>
@@ -65,6 +68,15 @@ function SortPopUp({ categories }) {
       )}
     </div>
   );
-}
+});
+
+SortPopUp.propTypes = {
+  activeSortType: PropTypes.string.isRequired,
+  onClickSortType: PropTypes.func.isRequired,
+};
+
+SortPopUp.defaultProps = {
+  items: [],
+};
 
 export default SortPopUp;
