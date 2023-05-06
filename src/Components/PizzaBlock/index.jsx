@@ -3,8 +3,6 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import LoadingBlock from './LoadingBlock';
-
 export default function PizzaBlock({ name, imageUrl, price, types, sizes }) {
   const availableTypes = ['тонкое', 'традиционное'];
   const [activeType, setActiveType] = useState(types[0]);
