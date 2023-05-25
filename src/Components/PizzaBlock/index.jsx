@@ -87,8 +87,6 @@ export default function PizzaBlock({
             />
           </svg>
           <span>Добавить</span>
-          {console.log(addedCount)}
-          <i>{addedCount}</i>
           {addedCount && <i>{addedCount}</i>}
         </Button>
       </div>

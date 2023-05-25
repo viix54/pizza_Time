@@ -23,9 +23,6 @@ function Home() {
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
 
-  console.log(cartItems[0]);
-  console.log(cartItems);
-
   const onSelectCategory = React.useCallback((index) => {
     dispatch(setCategory(index));
   }, []);
@@ -62,7 +59,7 @@ function Home() {
               <PizzaBlock
                 onAddPizza={handleAddPizza}
                 key={pizza.id}
-                addedCount={console.log(cartItems[pizza.id] && cartItems[pizza.id].length)}
+                addedCount={cartItems[pizza.id] && cartItems[pizza.id].items.length}
                 {...pizza}
               />
             ))
